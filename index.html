@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="google-site-verification" content="XBLf4l9-7VQKhD1b9XWP3LecHZ-QGJ5dQFfWw9C0LyI" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Dell-Optimizer-Hotkeys-AHK-v2 | Contains the AutoHotKey v2.0 script needed to use HotKeys to change Dell Optimizer Thermal Management Modes</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Dell-Optimizer-Hotkeys-AHK-v2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Contains the AutoHotKey v2.0 script needed to use HotKeys to change Dell Optimizer Thermal Management Modes" />
+<meta property="og:description" content="Contains the AutoHotKey v2.0 script needed to use HotKeys to change Dell Optimizer Thermal Management Modes" />
+<link rel="canonical" href="https://hyperionstic.github.io/Dell-Optimizer-Hotkeys-AHK-v2/" />
+<meta property="og:url" content="https://hyperionstic.github.io/Dell-Optimizer-Hotkeys-AHK-v2/" />
+<meta property="og:site_name" content="Dell-Optimizer-Hotkeys-AHK-v2" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Dell-Optimizer-Hotkeys-AHK-v2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Contains the AutoHotKey v2.0 script needed to use HotKeys to change Dell Optimizer Thermal Management Modes","headline":"Dell-Optimizer-Hotkeys-AHK-v2","name":"Dell-Optimizer-Hotkeys-AHK-v2","url":"https://hyperionstic.github.io/Dell-Optimizer-Hotkeys-AHK-v2/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/Dell-Optimizer-Hotkeys-AHK-v2/assets/css/style.css?v=03da7abc9fd1958e33392df69d115b3bb78f4dce">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/Dell-Optimizer-Hotkeys-AHK-v2/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+
+      <h1 id="dell-optimizer-hotkeys-ahk-v2">Dell-Optimizer-Hotkeys-AHK-v2</h1>
+<p>Contains the AutoHotKey v2.0 script needed to use HotKeys to change Dell Optimizer Thermal Management Modes.</p>
+
+<p>This is useful for Dell Latitude Systems</p>
+<blockquote>
+  <p>[!IMPORTANT]
+This script is required to be started as an Administrator, or else Dell Optimizer CLI <code class="language-plaintext highlighter-rouge">do-cli.exe</code> will not be able to apply settings.</p>
+
+  <p><code class="language-plaintext highlighter-rouge">do-cli.exe</code> can be found at <code class="language-plaintext highlighter-rouge">"C:\Program Files\Dell\DellOptimizer\do-cli.exe"</code>, Standard Installation path for Dell Optimizer</p>
+
+  <p>Sadly there is no popup to alert you if you have switched modes, but it works every single time I’ve checked!!</p>
+</blockquote>
+
+<blockquote>
+  <p>[!TIP]
+There’s a guide below to help you start the script as Administrator via Task Scheduler when logged on (Makes life much easier!!)</p>
+</blockquote>
+
+<h2 id="usage-instructions">Usage Instructions</h2>
+<blockquote>
+  <p>[!IMPORTANT]
+Install <a href="https://www.autohotkey.com/">AutoHotKey v2</a>. Install it for <code class="language-plaintext highlighter-rouge">All users</code> in the setup.</p>
+
+  <p>Download the script I’ve made from <a href="https://github.com/HyperionSTIC/Dell-Optimizer-Hotkeys-AHK-v2/releases">Releases</a></p>
+
+  <p>Place it wherre you prefer!! Remember the location of the file, this will be needed to start the script as Administrator on login!!</p>
+</blockquote>
+
+<p>Ctrl + Shift + Alt + 1 to 4 (top number row)</p>
+
+<ul>
+  <li>1 - Optimized</li>
+  <li>2 - Cool</li>
+  <li>3 - Quiet</li>
+  <li>4 - Ultra</li>
+</ul>
+
+<h2 id="customize-your-hotkeys">Customize your HotKeys</h2>
+
+<p>You can use Notepad or whatever editor you use to edit text files and scripts</p>
+
+<p>If you want to change the Hotkeys Take a look at <a href="https://www.autohotkey.com/docs/v2/Hotkeys.htm#Symbols">HotKey Modifier Symbols</a></p>
+<ul>
+  <li>Shift is +</li>
+  <li>Ctrl is ^</li>
+  <li>Alt is !</li>
+  <li>Win key is Win</li>
+</ul>
+
+<p>An example - Say you want to use Shift + O for Optimized mode, in the script, you need to change <code class="language-plaintext highlighter-rouge">^+!1::</code> to <code class="language-plaintext highlighter-rouge">+O::</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>^+!1::
+{
+run "cmd.exe /k`"C:\Program Files\Dell\DellOptimizer\do-cli.exe`" /configure -name=SystemPowerConfiguration.ThermalMode -value=Optimized",, "Hide"
+}
+</code></pre></div></div>
+<p>Changes to this</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+O::
+{
+run "cmd.exe /k`"C:\Program Files\Dell\DellOptimizer\do-cli.exe`" /configure -name=SystemPowerConfiguration.ThermalMode -value=Optimized",, "Hide"
+}
+</code></pre></div></div>
+
+<h2 id="setting-it-up-to-work-after-a-system-boot-with-admin">Setting it up to work after a System boot with admin</h2>
+
+<ul>
+  <li>Open Task Scheduler <code class="language-plaintext highlighter-rouge">Win + R &gt; taskschd.msc</code></li>
+  <li>Select <code class="language-plaintext highlighter-rouge">Create New Task</code></li>
+  <li>General Tab
+    <ul>
+      <li>Name it whatever you like, I have named it as <code class="language-plaintext highlighter-rouge">DellOptimizerThermalMode</code></li>
+      <li>Description if needed.</li>
+      <li>Make sure your Admin user account is selected under <code class="language-plaintext highlighter-rouge">Security Options</code></li>
+      <li>Tick the following
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Run when only when user is logged on</code></li>
+          <li><code class="language-plaintext highlighter-rouge">Run with highest privilages</code></li>
+          <li><code class="language-plaintext highlighter-rouge">Hidden</code></li>
+          <li>Configure for: <code class="language-plaintext highlighter-rouge">Windows 10</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Triggers Tab
+    <ul>
+      <li>Click <code class="language-plaintext highlighter-rouge">New</code></li>
+      <li>Select from the top dropdown list, <code class="language-plaintext highlighter-rouge">At Startup</code></li>
+      <li>Tick <code class="language-plaintext highlighter-rouge">Enabled</code></li>
+    </ul>
+  </li>
+  <li>Actions Tab
+    <ul>
+      <li>Click <code class="language-plaintext highlighter-rouge">New</code></li>
+      <li>Action <code class="language-plaintext highlighter-rouge">Start a Program</code></li>
+      <li>Select <code class="language-plaintext highlighter-rouge">Browse</code>. Select the AHK script I made</li>
+      <li>Select <code class="language-plaintext highlighter-rouge">Ok</code></li>
+    </ul>
+  </li>
+  <li>Conditions Tab
+    <ul>
+      <li>Uncheck everything here</li>
+    </ul>
+  </li>
+  <li>Settings Tab
+    <ul>
+      <li>Select <code class="language-plaintext highlighter-rouge">Allow Task to be run on demand</code></li>
+      <li>Uncheck everything else here</li>
+      <li>Select <code class="language-plaintext highlighter-rouge">Ok</code></li>
+    </ul>
+  </li>
+  <li>A prompt appears and type in your Windows Password (Not Windows Hello pin or password)</li>
+</ul>
+
+<p>And we are done!!</p>
+
+<h2 id="resources-ive-used">Resources I’ve used</h2>
+
+<ul>
+  <li><a href="https://www.dell.com/support/manuals/en-us/dell-optimizer/dell-optimizer-4.0_ug/command-line-interface-for-dell-optimizer?guid=guid-a82481c9-8abf-4a15-9f2b-6011e36c6b19&amp;lang=en-us">Dell Optimizer Version 4.0 User’s Guide</a></li>
+</ul>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/HyperionSTIC/Dell-Optimizer-Hotkeys-AHK-v2/edit/main/README.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
