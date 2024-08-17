@@ -69,7 +69,7 @@ run "cmd.exe /k`"C:\Program Files\Dell\DellOptimizer\do-cli.exe`" /configure -na
     - Configure for: `Windows 10`
 - Triggers Tab
   - Click `New`
-  - Select from the top dropdown list, `At Startup`
+  - Select from the top dropdown list, `At log on of any user`
   - Tick `Enabled`
 - Actions Tab
   - Click `New`
@@ -80,6 +80,8 @@ run "cmd.exe /k`"C:\Program Files\Dell\DellOptimizer\do-cli.exe`" /configure -na
   - Uncheck everything here
 - Settings Tab
   - Select `Allow Task to be run on demand`
+  - Select, if the task fails, restart every `1 minute`
+  - Select, Attempt to restart up to `3 times`
   - Uncheck everything else here
   - Select `Ok`
 
